@@ -1,19 +1,19 @@
-#from openjdk:8-jdk-alpine
-from alpine:latest
+from openjdk:8-jdk-alpine
 
 ENV sbt_version 1.0.0
 ENV sbt_home /usr/local/sbt
 ENV PATH ${PATH}:${sbt_home}/bin
 
-#RUN apk --no-cache --update add tar gzip bash wget vim tmux nodejs nodejs-npm && \
-#RUN apk --no-cache --update add tar gzip bash wget vim tmux && \
-    # mkdir -p "$sbt_home" && \
-    # wget -q --no-check-certificate -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
-    # wget -q --no-check-certificate https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.25-r0/glibc-2.25-r0.apk && apk add glibc-2.25-r0.apk && rm glibc-2.25-r0.apk && \
-    # wget -qO - --no-check-certificate "https://github.com/sbt/sbt/releases/download/v$sbt_version/sbt-$sbt_version.tgz" | tar xz -C $sbt_home --strip-components=1 && \
-    # apk del wget && \
-    # sbt sbtVersion
-    #
+RUN apk --no-cache --update add tar gzip bash wget vim tmux openssl openssh-client nodejs nodejs-npm xz git && \
+    mkdir -p "$sbt_home" && \
+    wget -q --no-check-certificate -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub && \
+    wget -q --no-check-certificate https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.25-r0/glibc-2.25-r0.apk && apk add glibc-2.25-r0.apk && rm glibc-2.25-r0.apk && \
+    wget -qO - --no-check-certificate "https://github.com/sbt/sbt/releases/download/v$sbt_version/sbt-$sbt_version.tgz" | tar xz -C $sbt_home --strip-components=1 && \
+    apk del wget && \
+    sbt sbtVersion
+
+ENV VERSION=v8.6.0 NPM_VERSION=5 YARN_VERSION=latest
+
 # For base builds
 ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libstdc++" RM_DIRS=/usr/include
 
@@ -54,4 +54,6 @@ RUN apk add --no-cache curl make gcc g++ python linux-headers binutils-gold gnup
   rm -rf ${RM_DIRS} /node-${VERSION}* /usr/share/man /tmp/* /var/cache/apk/* \
     /root/.npm /root/.node-gyp /root/.gnupg /usr/lib/node_modules/npm/man \
     /usr/lib/node_modules/npm/doc /usr/lib/node_modules/npm/html /usr/lib/node_modules/npm/scripts
+
+RUN npm install -g yarn
 
