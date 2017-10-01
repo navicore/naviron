@@ -1,6 +1,6 @@
 from navicore/naviron-java-node
 
-RUN apk add --update sed
+RUN apk add --update sed screen
 
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 RUN set -x && chmod +x /usr/local/bin/kubectl
@@ -11,11 +11,11 @@ RUN coursier bootstrap com.geirsson:scalafmt-cli_2.12:1.2.0 -o /usr/local/bin/sc
 # SETUP USER
 #
 
-ENV SHELL /bin/zsh
-RUN addgroup -S navicore && adduser -S -s /bin/zsh -g navicore navicore 
+RUN adduser -h /home/navicore -s /bin/zsh -G root -D navicore
+WORKDIR /home/navicore
 USER navicore
 ENV HOME /home/navicore
-ENTRYPOINT ["/bin/zsh"]
+ENV SHELL /bin/zsh
 
 #
 # Customize dot files
@@ -33,5 +33,13 @@ RUN vim -c 'PluginInstall' -c 'qa!'
 RUN cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer --tern-completer
 RUN cd ~/.vim/bundle/vimproc.vim && make
 
+#workaround for tmux
+RUN rm ~/.tmux.conf && cp ~/naviscripts/tmux.conf_naviron ~/.tmux.conf
+
 RUN zsh -c "source ~/.zshrc || :"
+
+# node linters
+RUN npm install -g prettier standard prettier-standard eslint
+
+ENTRYPOINT ["tmux", "-u"]
 
