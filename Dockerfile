@@ -1,7 +1,11 @@
 from navicore/naviron-java-node
 
+RUN apk add --update sed
+
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 RUN set -x && chmod +x /usr/local/bin/kubectl
+
+RUN coursier bootstrap com.geirsson:scalafmt-cli_2.12:1.2.0 -o /usr/local/bin/scalafmt --standalone --main org.scalafmt.cli.Cli
 
 #
 # SETUP USER
