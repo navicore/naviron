@@ -1,0 +1,16 @@
+script:
+  - docker build -t navicore/naviron .
+
+services:
+  - docker
+
+sudo: required
+
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD";
+    docker push "navicore/naviron";
+    docker tag "navicore/naviron" "navicore/naviron:0.1.$TRAVIS_BUILD_NUMBER";
+    docker push "navicore/naviron:0.1.$TRAVIS_BUILD_NUMBER";
+    fi
+
