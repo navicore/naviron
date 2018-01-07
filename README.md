@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/navicore/naviron.svg?branch=master)](https://travis-ci.org/navicore/naviron)
+
 an image for creating Docker containers of a vim-based many-language supporting tmux-centric dev environment
 
 default tmux:

@@ -1,4 +1,4 @@
-from navicore/naviron-gerbil
+from navicore/naviron-gerbil:0.1.1
 
 # node linters
 RUN npm install -g prettier standard prettier-standard eslint
