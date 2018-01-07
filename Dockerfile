@@ -46,6 +46,8 @@ RUN cd ~/.vim/bundle/vimproc.vim && make
 #workaround for tmux
 RUN rm ~/.tmux.conf && cp ~/naviscripts/tmux.conf_naviron ~/.tmux.conf
 
+RUN echo "export PATH=/root/gerbil/bin:$PATH" >> ~/.zshrc_local
+
 RUN zsh -c "source ~/.zshrc || :"
 
 ENTRYPOINT ["tmux", "-u"]
