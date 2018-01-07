@@ -1,5 +1,4 @@
-from navicore/naviron-other
-#from navicore/naviron-java-node
+from navicore/naviron-chezscheme
 
 # node linters
 RUN npm install -g prettier standard prettier-standard eslint
