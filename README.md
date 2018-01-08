@@ -6,6 +6,8 @@ default tmux:
 
 ```console
 docker run --name naviron -it navicore/naviron
+ or with local files
+docker run -v /Users/navicore/.ssh:/home/navicore/.ssh -v /Users/navicore/git:/home/navicore/git --name naviron -it navicore/naviron
 ```
 
 sh:
