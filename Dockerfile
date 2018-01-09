@@ -1,4 +1,4 @@
-FROM navicore/naviron-gerbil:0.1.3
+FROM navicore/naviron-gerbil:0.1.4
 
 FROM navicore/naviron-chezscheme:0.1.2
 
