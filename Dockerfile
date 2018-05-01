@@ -7,7 +7,7 @@ COPY --from=0 /opt /opt
 # node linters
 RUN npm install -g prettier standard prettier-standard eslint
 
-ADD https://storage.googleapis.com/kubernetes-release/release/v1.8.0/bin/linux/amd64/kubectl /usr/local/bin/kubectl
+ADD https://storage.googleapis.com/kubernetes-release/release/v1.10.1/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 
 RUN set -x && chmod +x /usr/local/bin/kubectl \
     && pip install sexpdata websocket-client  \
