@@ -1,3 +1,8 @@
+<!-- ghmig:moved -->
+> **This repository has moved to [https://git.navicore.tech/navicore/naviron](https://git.navicore.tech/navicore/naviron).**
+>
+> The GitHub copy is archived and no longer maintained.
+
 [![Build Status](https://travis-ci.org/navicore/naviron.svg?branch=master)](https://travis-ci.org/navicore/naviron)
 
 an image for creating Docker containers of a vim-based many-language supporting tmux-centric dev environment
@@ -33,4 +38,3 @@ kubernetes re-attach
 ```console
 kubectl attach naviron-<POD ID> -c naviron -i -t
 ```
-
